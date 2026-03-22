@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venkat's Learning Hub 🚀</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #0a0f1e;
+  min-height: 100vh;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Background stars */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 70%, rgba(255,255,255,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.2) 0%, transparent 100%),
+    radial-gradient(2px 2px at 40% 20%, rgba(255,255,255,0.15) 0%, transparent 100%),
+    radial-gradient(2px 2px at 70% 90%, rgba(255,255,255,0.15) 0%, transparent 100%);
+  pointer-events: none; z-index: 0;
+}
+
+.container {
+  position: relative; z-index: 1;
+  max-width: 900px; margin: 0 auto;
+  padding: 60px 24px;
+}
+
+/* HEADER */
+.header { text-align: center; margin-bottom: 60px; }
+.header .greeting {
+  font-size: 13px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: #f5a623;
+  margin-bottom: 16px;
+}
+.header h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.15; margin-bottom: 16px;
+  background: linear-gradient(135deg, #ffffff 0%, #a8c4e0 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.header p {
+  font-size: 16px; color: rgba(255,255,255,0.55);
+  max-width: 500px; margin: 0 auto; line-height: 1.7;
+}
+
+/* STATS ROW */
+.stats-row {
+  display: flex; justify-content: center; gap: 32px;
+  margin-bottom: 60px; flex-wrap: wrap;
+}
+.stat-item { text-align: center; }
+.stat-item .num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 36px; color: #f5a623; display: block;
+}
+.stat-item .label { font-size: 12px; color: rgba(255,255,255,0.45); letter-spacing: 1px; }
+
+/* SECTION TITLE */
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  margin-bottom: 20px; text-align: center;
+}
+
+/* PROJECTS GRID */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 20px; margin-bottom: 48px;
+}
+
+/* PROJECT CARD */
+.project-card {
+  border-radius: 20px; padding: 28px;
+  position: relative; overflow: hidden;
+  cursor: pointer; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255,255,255,0.08);
+  text-decoration: none; display: block;
+}
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+  border-color: rgba(255,255,255,0.15);
+}
+.project-card::before {
+  content: ''; position: absolute; inset: 0;
+  opacity: 0; transition: opacity 0.35s;
+  background: rgba(255,255,255,0.04);
+}
+.project-card:hover::before { opacity: 1; }
+
+/* Card variants */
+.card-trading {
+  background: linear-gradient(135deg, #0f2744 0%, #1a4a8a 100%);
+}
+.card-coming {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.card-glow-blue { box-shadow: 0 8px 32px rgba(26,74,138,0.3); }
+.card-glow-purple { box-shadow: 0 8px 32px rgba(108,58,131,0.2); }
+
+/* Card header */
+.card-top {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; margin-bottom: 20px;
+}
+.card-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+}
+.icon-blue { background: rgba(245,166,35,0.15); }
+.icon-gray { background: rgba(255,255,255,0.06); }
+
+.card-badge {
+  padding: 4px 12px; border-radius: 20px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+}
+.badge-live { background: rgba(34,197,94,0.2); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+.badge-soon { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.1); }
+
+/* Card body */
+.card-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px; margin-bottom: 8px; color: white;
+}
+.card-telugu {
+  font-size: 13px; color: rgba(255,255,255,0.5);
+  margin-bottom: 14px; font-style: italic;
+}
+.card-desc {
+  font-size: 14px; color: rgba(255,255,255,0.65);
+  line-height: 1.7; margin-bottom: 20px;
+}
+
+/* Tags */
+.card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+.tag {
+  padding: 4px 10px; border-radius: 6px;
+  font-size: 11px; font-weight: 600;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.6);
+}
+.tag-accent { background: rgba(245,166,35,0.15); color: #f5a623; }
+
+/* Card footer */
+.card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.card-link {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700;
+  transition: gap 0.2s;
+}
+.card-trading .card-link { color: #f5a623; }
+.card-coming .card-link { color: rgba(255,255,255,0.3); }
+.project-card:hover .card-link { gap: 10px; }
+.card-arrow { font-size: 16px; transition: transform 0.2s; }
+.project-card:hover .card-arrow { transform: translateX(4px); }
+
+.card-meta { font-size: 11px; color: rgba(255,255,255,0.3); }
+
+/* Progress bar on card */
+.card-progress { margin-bottom: 20px; }
+.prog-label {
+  display: flex; justify-content: space-between;
+  font-size: 11px; color: rgba(255,255,255,0.4);
+  margin-bottom: 6px;
+}
+.prog-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+.prog-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #f5a623, #ff6b35); transition: width 0.5s; }
+
+/* FOOTER */
+.footer {
+  text-align: center; padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer p { font-size: 13px; color: rgba(255,255,255,0.25); line-height: 1.8; }
+.footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+.footer a:hover { color: #f5a623; }
+
+/* Coming soon card content */
+.coming-soon-inner {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  min-height: 180px; text-align: center;
+}
+.coming-soon-inner .cs-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
+.coming-soon-inner h3 { font-size: 16px; color: rgba(255,255,255,0.3); margin-bottom: 6px; }
+.coming-soon-inner p { font-size: 13px; color: rgba(255,255,255,0.2); }
+
+/* Pulse dot */
+.pulse-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #22c55e; display: inline-block;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .stats-row { gap: 20px; }
+  .container { padding: 40px 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <p class="greeting">👋 Welcome to my Learning Hub</p>
+    <h1>Venkat's Projects<br>& Courses</h1>
+    <p>నేను నేర్చుకున్నవి, build చేసినవి — అన్నీ ఒకే చోట</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-item">
+      <span class="num" id="proj-count">1</span>
+      <span class="label">Projects Live</span>
+    </div>
+    <div class="stat-item">
+      <span class="num" id="topic-count">—</span>
+      <span class="label">Topics Learned</span>
+    </div>
+    <div class="stat-item">
+      <span class="num">∞</span>
+      <span class="label">Learning Never Stops</span>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <p class="section-label">My Projects</p>
+  <div class="projects-grid">
+
+    <!-- Card 1: Options Trading Course -->
+    <a class="project-card card-trading card-glow-blue"
+       href="https://pdvenkat94.github.io/options-trading-course"
+       target="_blank">
+      <div class="card-top">
+        <div class="card-icon icon-blue">📈</div>
+        <span class="card-badge badge-live"><span class="pulse-dot"></span> &nbsp;Live</span>
+      </div>
+      <h2 class="card-title">Options Trading Course</h2>
+      <p class="card-telugu">Telugu & English లో నేర్చుకోండి</p>
+      <p class="card-desc">Beginner నుండి Pro Scalper వరకు — Interactive quizzes, P&L calculators, మరియు 6 phases of structured content.</p>
+      <div class="card-tags">
+        <span class="tag tag-accent">📚 6 Phases</span>
+        <span class="tag tag-accent">❓ Quizzes</span>
+        <span class="tag tag-accent">🧮 Calculators</span>
+        <span class="tag">Telugu</span>
+        <span class="tag">Options</span>
+      </div>
+      <div class="card-progress">
+        <div class="prog-label"><span>Your Progress</span><span id="dash-prog">Loading...</span></div>
+        <div class="prog-bar"><div class="prog-fill" id="dash-prog-fill" style="width:0%"></div></div>
+      </div>
+      <div class="card-footer">
+        <span class="card-link">Open Course <span class="card-arrow">→</span></span>
+        <span class="card-meta">github.io</span>
+      </div>
+    </a>
+
+    <!-- Card 2: Coming Soon -->
+    <div class="project-card card-coming card-glow-purple" style="cursor:default;">
+      <div class="card-top">
+        <div class="card-icon icon-gray">🔜</div>
+        <span class="card-badge badge-soon">Coming Soon</span>
+      </div>
+      <div class="coming-soon-inner">
+        <div class="cs-icon">🚧</div>
+        <h3>Next Project</h3>
+        <p>మీ తర్వాతి project ఇక్కడ వస్తుంది!<br>Build చేసిన తర్వాత ఇక్కడ add చేయవచ్చు.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-link" style="color:rgba(255,255,255,0.2)">In Progress <span class="card-arrow">⏳</span></span>
+        <span class="card-meta">— —</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>
+      Built with ❤️ by <strong style="color:rgba(255,255,255,0.5)">Venkat Pettlu</strong><br>
+      <a href="https://github.com/pdvenkat94" target="_blank">github.com/pdvenkat94</a>
+    </p>
+  </div>
+
+</div>
+
+<script>
+// Show progress from Options Trading Course localStorage
+function loadProgress() {
+  try {
+    const progress = JSON.parse(localStorage.getItem('op_progress') || '{}');
+    const TOTAL_TOPICS = 14; // Total topics in course
+    const done = Object.keys(progress).filter(k => progress[k]).length;
+    const pct = Math.round(done / TOTAL_TOPICS * 100);
+
+    document.getElementById('dash-prog').textContent = `${pct}% (${done}/${TOTAL_TOPICS})`;
+    document.getElementById('dash-prog-fill').style.width = pct + '%';
+    document.getElementById('topic-count').textContent = done;
+  } catch(e) {
+    document.getElementById('dash-prog').textContent = 'Open course to track';
+    document.getElementById('topic-count').textContent = '0';
+  }
+}
+loadProgress();
+</script>
+
+</body>
+</html>
